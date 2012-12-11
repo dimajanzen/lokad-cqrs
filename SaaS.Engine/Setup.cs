@@ -155,7 +155,7 @@ namespace SaaS.Wires
                 if (message is IFuncCommand)
                 {
                     // randomly distribute between queues
-                    var i = Environment.TickCount % processing.Length;
+                    var i = (Environment.TickCount & Int32.MaxValue) % processing.Length;
                     processing[i].PutMessage(data);
                     return;
                 }
